@@ -1,0 +1,67 @@
+ARUN KUMAR
+Chennai, Tamil Nadu
+arun@email.com | +91 9876543210
+GitHub: github.com/arunkumar
+LinkedIn: linkedin.com/in/arunkumar
+
+SOFTWARE ENGINEER | PYTHON DEVELOPER
+
+PROFESSIONAL SUMMARY
+
+Motivated Software Developer with strong foundations in Python, SQL, data structures, and backend development. Experienced in developing scalable applications, RESTful services, and database-driven solutions through academic and personal projects. Passionate about problem solving, software engineering best practices, and building reliable products.
+
+TECHNICAL SKILLS
+
+Languages:
+Python, SQL, JavaScript
+
+Frameworks:
+Flask
+
+Tools:
+Git, GitHub, VS Code
+
+Concepts:
+Data Structures, Algorithms, OOP, Database Design, REST APIs
+
+PROJECTS
+
+Student Management System
+
+- Designed and developed a student management application using Python and SQL.
+- Implemented CRUD operations for efficient data management.
+- Structured database queries to improve retrieval and update performance.
+- Applied object-oriented programming principles for maintainable code.
+
+Task Automation Tool
+
+- Developed Python automation scripts to streamline repetitive workflows.
+- Reduced manual effort through automated file processing and reporting.
+- Implemented exception handling and logging for reliability.
+
+EXPERIENCE
+
+Software Development Intern
+
+- Assisted in backend feature development using Python.
+- Collaborated with team members using Git version control.
+- Participated in debugging, testing, and performance improvements.
+- Contributed to code reviews and documentation activities.
+
+EDUCATION
+
+Bachelor of Engineering in Computer Science
+XYZ Engineering College
+2021 – 2025
+
+CERTIFICATIONS
+
+- Python Programming
+- SQL Fundamentals
+- Git and GitHub
+
+ACHIEVEMENTS
+
+- Built multiple end-to-end software projects.
+- Solved programming challenges on coding platforms.
+- Participated in technical workshops and hackathons.

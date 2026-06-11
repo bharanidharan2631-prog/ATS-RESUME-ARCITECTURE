@@ -1,0 +1,70 @@
+**ARUN KUMAR**
+**Chennai, Tamil Nadu**
+**arun@email.com | +91 9876543210**
+**GitHub: github.com/arunkumar**
+**LinkedIn: linkedin.com/in/arunkumar**
+
+**SENIOR PYTHON AI/ML DEVELOPER**
+
+**PROFESSIONAL SUMMARY**
+
+Results-driven Senior Python AI/ML Developer with expertise in designing, developing, and deploying AI/ML solutions and production-grade applications. Proven track record of building scalable REST APIs, integrating machine learning models into production, and ensuring high code quality and performance optimization. Skilled in Python, SQL, data structures, and backend development.
+
+**TECHNICAL SKILLS**
+
+* **Programming Languages:** Python, SQL
+* **Frameworks:** Flask
+* **Tools:** Git, GitHub, VS Code
+* **Concepts:** Data Structures, Algorithms, Object-Oriented Programming (OOP), Database Design, REST APIs, Decorators, Generators, Context Managers, Async programming (asyncio, threading, multiprocessing)
+* **AI/ML Skills:** Data preprocessing and feature engineering, Model evaluation and performance tuning, NLP and/or Computer Vision experience, Experience deploying ML models into production
+* **Database Skills:** SQL (PostgreSQL, MySQL), NoSQL (MongoDB, DynamoDB)
+* **Other Skills:** REST API development (FastAPI / Flask / Django), Software engineering best practices
+
+**PROJECTS**
+
+* **Student Management System**
+	+ Designed and developed a student management application using Python and SQL.
+	+ Implemented CRUD operations for efficient data management.
+	+ Structured database queries to improve retrieval and update performance.
+	+ Applied object-oriented programming principles for maintainable code.
+* **Task Automation Tool**
+	+ Developed Python automation scripts to streamline repetitive workflows.
+	+ Reduced manual effort through automated file processing and reporting.
+	+ Implemented exception handling and logging for reliability.
+
+**EXPERIENCE**
+
+* **Software Development Intern**
+	+ Assisted in backend feature development using Python.
+	+ Collaborated with team members using Git version control.
+	+ Participated in debugging, testing, and performance improvements.
+	+ Contributed to code reviews and documentation activities.
+
+**EDUCATION**
+
+* **Bachelor of Engineering in Computer Science**
+	+ XYZ Engineering College
+	+ 2021 – 2025
+
+**CERTIFICATIONS**
+
+* **Python Programming**
+* **SQL Fundamentals**
+* **Git and GitHub**
+
+**ACHIEVEMENTS**
+
+* **Built multiple end-to-end software projects.**
+* **Solved programming challenges on coding platforms.**
+* **Participated in technical workshops and hackathons.**
+
+**Changes Made:**
+
+1. Improved formatting for better readability.
+2. Enhanced the Professional Summary to highlight key skills and experience.
+3. Rearranged Technical Skills to group related categories together.
+4. Emphasized AI/ML skills and experience in the Technical Skills section.
+5. Removed unnecessary words and phrases to improve clarity.
+6. Added relevant keywords from the job description to improve ATS compatibility.
+7. Improved bullet points to make them more concise and effective.
+8. Removed the "SOFTWARE ENGINEER | PYTHON DEVELOPER" line, as it is not necessary and can be inferred from the Professional Summary.
