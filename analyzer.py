@@ -1,91 +1,102 @@
-import re
 import os
 from dotenv import load_dotenv
 from groq import Groq
 
 load_dotenv()
 
-api_key = os.getenv("GROQ_API_KEY")
-client = Groq(api_key=api_key)
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
+)
 
-STOP_WORDS = {
-    "the", "and", "to", "of", "in", "a", "for", "on", "with",
-    "is", "are", "this", "that", "by", "as", "an", "be",
-    "at", "from", "or", "it", "we", "you", "your", "will",
-    "into", "use", "using", "their", "our", "they"
-}
-
-def extract_keywords(text):
-    words = re.findall(r'\w+', text.lower())
-    return set([w for w in words if w not in STOP_WORDS and len(w) > 2])
-
-
-def get_ai_suggestions(resume, jd, missing_keywords, score):
-
+# ----------------------------
+# 1. AI → Only suggestions
+# ----------------------------
+def get_ai_suggestions(missing_keywords):
     prompt = f"""
-You are an expert ATS Resume Reviewer.
-
-Analyze the resume against the job description and give ONLY 6-8 strong, practical suggestions.
-
-Rules:
-- Be specific and personalized
-- Do NOT give generic advice
-- Focus on missing skills and improvements
-- Keep suggestions short and actionable
-
-ATS Score: {score}
+You are an ATS Resume Expert.
 
 Missing Keywords:
 {missing_keywords}
 
-Resume:
-{resume}
-
-Job Description:
-{jd}
-
-Return only bullet points.
+Give 6 short ATS improvement suggestions.
+Return bullet points only.
 """
 
-    response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.3
-    )
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
+        )
 
-    return response.choices[0].message.content.split("\n")
+        return [
+            x.strip("-• ").strip()
+            for x in response.choices[0].message.content.split("\n")
+            if x.strip()
+        ]
+
+    except:
+        return []
 
 
+# ----------------------------
+# 2. MAIN ATS ENGINE
+# ----------------------------
 def analyze_resume(resume, jd):
 
-    resume_words = extract_keywords(resume)
-    jd_words = extract_keywords(jd)
+    # -------- manual keyword extraction (IMPORTANT) --------
+    jd_keywords = list(set([
+        word.strip()
+        for word in jd.replace(",", " ").split()
+        if len(word) > 2
+    ]))
 
-    if not jd_words:
-        return {
-            "ats_score": 0,
-            "keyword_match_percentage": 0,
-            "missing_keywords": [],
-            "suggestions": ["Job description is empty"]
-        }
+    resume_text = resume.lower()
 
-    common_words = resume_words & jd_words
+    matched_keywords = []
+    missing_keywords = []
 
-    match_percentage = (len(common_words) / len(jd_words)) * 100
+    for keyword in jd_keywords:
+        if keyword.lower() in resume_text:
+            matched_keywords.append(keyword)
+        else:
+            missing_keywords.append(keyword)
 
-    missing_keywords = list(jd_words - resume_words)
+    # -------- SCORE CALCULATION (FIXED) --------
+    keyword_score = int((len(matched_keywords) / len(jd_keywords)) * 50) if jd_keywords else 0
 
-    # AI-generated suggestions
-    suggestions = get_ai_suggestions(
-        resume,
-        jd,
-        missing_keywords[:10],
-        round(match_percentage, 2)
-    )
+    title_score = 15 if "python" in resume_text else 5
+
+    format_score = 15 if "experience" in resume_text.lower() else 10
+
+    experience_score = 10 if len(resume.split()) > 100 else 5
+
+    penalty_score = 0
+
+    final_score = keyword_score + title_score + format_score + experience_score - penalty_score
+
+    if final_score >= 90:
+        rating = "EXCELLENT MATCH"
+    elif final_score >= 75:
+        rating = "STRONG MATCH"
+    elif final_score >= 60:
+        rating = "GOOD MATCH"
+    elif final_score >= 40:
+        rating = "FAIR MATCH"
+    else:
+        rating = "POOR MATCH"
+
+    suggestions = get_ai_suggestions(missing_keywords[:10])
 
     return {
-        "ats_score": round(match_percentage, 2),
-        "keyword_match_percentage": round(match_percentage, 2),
-        "missing_keywords": missing_keywords[:10],
-        "suggestions": suggestions
+        "keyword_score": keyword_score,
+        "title_score": title_score,
+        "format_score": format_score,
+        "experience_score": experience_score,
+        "penalty_score": penalty_score,
+        "final_score": final_score,
+        "rating": rating,
+        "matched_keywords": matched_keywords,
+        "missing_keywords": missing_keywords,
+        "improvements": suggestions
     }

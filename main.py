@@ -2,6 +2,7 @@ from pathlib import Path
 from utils import read_file
 from analyzer import analyze_resume
 from resume_builder import build_resume
+from pdf_builder import build_resume_pdf
 
 print("=" * 60)
 print("ATS Resume Analyzer")
@@ -25,6 +26,7 @@ while True:
 
     if line == "":
         blank += 1
+
         if blank == 2:
             break
     else:
@@ -34,31 +36,32 @@ while True:
 
 jd = "\n".join(lines).strip()
 
+# ATS Analysis
 result = analyze_resume(resume, jd)
+print("\n========================================")
+print("ATS ANALYSIS REPORT")
+print("========================================")
 
-print("\n" + "=" * 40)
-print("RESULTS")
-print("=" * 40)
+print(f"\nKeyword Match Score   : {result.get('keyword_score',0)}/50")
+print(f"Job Title Match Score : {result.get('title_score',0)}/20")
+print(f"Formatting Score      : {result.get('format_score',0)}/15")
+print(f"Experience Score      : {result.get('experience_score',0)}/10")
+print(f"Penalty Score         : {result.get('penalty_score',0)}/5")
 
-print("\nATS SCORE:", result.get("ats_score", "N/A"))
-print("KEYWORD MATCH:", result.get("keyword_match_percentage", "N/A"), "%")
+print("\n----------------------------------------")
+print(f"FINAL ATS SCORE       : {result.get('final_score',0)}/100")
+print("----------------------------------------")
+
+print(f"\nATS Rating            : {result.get('rating','N/A')}")
+
+print("\nMATCHED KEYWORDS")
+for item in result.get("matched_keywords", []):
+    print("✓", item)
 
 print("\nMISSING KEYWORDS")
 for item in result.get("missing_keywords", []):
     print("-", item)
 
-print("\nSUGGESTIONS")
-for item in result.get("suggestions", []):
+print("\nIMPROVEMENTS")
+for item in result.get("improvements", []):
     print("-", item)
-
-choice = input("\nGenerate ATS Resume? (y/n): ")
-
-if choice.lower() == "y":
-    Path("output").mkdir(exist_ok=True)
-
-    resume_text = build_resume(resume, jd)
-
-    with open("output/ats_resume.txt", "w", encoding="utf-8") as f:
-        f.write(resume_text)
-
-    print("\nATS Resume saved to output/ats_resume.txt")

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATS AI Resume System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🚀 ATS Resume Analyzer</h1>
+
+    <form action="/analyze" method="post" enctype="multipart/form-data">
+
+        <label>Upload Resume</label>
+        <input type="file" name="resume" required>
+
+        <label>Job Description</label>
+        <textarea name="jd" required></textarea>
+
+        <label>Email ID</label>
+        <input type="email" name="email" required>
+
+        <button type="submit">Analyze & Send Resume</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
