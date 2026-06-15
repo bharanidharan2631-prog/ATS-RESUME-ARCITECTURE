@@ -1,0 +1,6 @@
+ats_env/
+__pycache__/
+.env
+output/
+uploads/
+*.pyc

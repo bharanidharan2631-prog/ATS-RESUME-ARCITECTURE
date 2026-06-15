@@ -1,0 +1,21 @@
+from PyPDF2 import PdfReader
+
+def read_file(path):
+
+    if path.endswith(".pdf"):
+
+        reader = PdfReader(path)
+
+        text = ""
+
+        for page in reader.pages:
+
+            page_text = page.extract_text()
+
+            if page_text:
+                text += page_text
+
+        return text
+
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
