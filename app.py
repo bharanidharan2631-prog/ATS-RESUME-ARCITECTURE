@@ -1,3 +1,4 @@
+import re
 import streamlit as st
 from pathlib import Path
 from analyzer import analyze_resume
@@ -50,6 +51,40 @@ if st.button("Analyze Resume"):
 
     if not jd:
         st.error("Please enter Job Description")
+        st.stop()
+
+    if email.strip():
+
+        pattern = r"^[^@]+@[^@]+\.[^@]+$"
+
+        if not re.match(pattern, email.strip()):
+            st.error("Please enter a valid email address")
+            st.stop()
+
+    Path("uploads").mkdir(exist_ok=True)
+    Path("output").mkdir(exist_ok=True)
+
+    file_path = f"uploads/{uploaded_file.name}"
+
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
+    resume = read_file(file_path)
+
+    st.session_state.resume_text = resume
+    st.session_state.jd_text = jd
+
+    with st.spinner("Analyzing Resume..."):
+        result = analyze_resume(resume, jd)
+
+    st.session_state.result = result
+
+if email.strip():
+
+    pattern = r"^[^@]+@[^@]+\.[^@]+$"
+
+    if not re.match(pattern, email.strip()):
+        st.error("Please enter a valid email address")
         st.stop()
 
     Path("uploads").mkdir(exist_ok=True)
