@@ -1,4 +1,5 @@
 from PyPDF2 import PdfReader
+from docx import Document
 
 def read_file(path):
 
@@ -14,6 +15,17 @@ def read_file(path):
 
             if page_text:
                 text += page_text
+
+        return text
+
+    elif path.endswith(".docx"):
+
+        doc = Document(path)
+
+        text = "\n".join(
+            paragraph.text
+            for paragraph in doc.paragraphs
+        )
 
         return text
 

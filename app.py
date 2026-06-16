@@ -28,7 +28,7 @@ if "result" not in st.session_state:
 # Upload Resume
 uploaded_file = st.file_uploader(
     "Upload Resume",
-    type=["pdf", "txt"]
+    type=["pdf", "txt","docx"]
 )
 
 # Job Description
