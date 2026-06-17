@@ -23,9 +23,19 @@ You are an ATS Resume Expert.
 Missing Keywords:
 {', '.join(missing_keywords)}
 
-Give 6 short ATS improvement suggestions.
+Generate EXACTLY 8 ATS resume improvement suggestions.
 
-Return bullet points only.
+Rules:
+- One line per suggestion
+- Maximum 12 words per suggestion
+- Focus only on missing keywords
+- No examples
+- No explanations
+- No quotation marks
+- No numbering
+- Professional ATS language
+
+Return ONLY 8 bullet points.
 """
 
     try:
@@ -37,13 +47,15 @@ Return bullet points only.
             temperature=0.3
         )
 
-        return [
+        suggestions = [
             x.strip("-• ").strip()
             for x in response.choices[0].message.content.split("\n")
             if x.strip()
         ]
 
-    except:
+        return suggestions[:8]
+
+    except Exception:
         return []
 
 
